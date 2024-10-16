@@ -3,16 +3,16 @@ import { ITunesStoreFeed, IAppInfoResponse } from "./types";
 
 export const itunesApi = createApi({
   reducerPath: "itunesApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://itunes.apple.com/tw/rss" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://itunes.apple.com/tw/" }),
   endpoints: (builder) => ({
     getTopFreeApps: builder.query<ITunesStoreFeed, number>({
       query: (limit) => {
-        return `/topfreeapplications/limit=${limit}/json`;
+        return `/rss/topfreeapplications/limit=${limit}/json`;
       },
     }),
     getTopGrossingApps: builder.query<ITunesStoreFeed, number>({
       query: (limit) => {
-        return `/topgrossingapplications/limit=${limit}/json`;
+        return `/rss/topgrossingapplications/limit=${limit}/json`;
       },
     }),
     getAppInfo: builder.query<IAppInfoResponse, string>({
