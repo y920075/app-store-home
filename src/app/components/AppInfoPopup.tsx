@@ -27,7 +27,7 @@ const AppInfoPopup: React.FC<AppInfoPopupProps> = ({ id, isOpen, onClose }) => {
     >
       {isLoading || isFetching ? (
         <div className="flex h-40 items-center justify-center">
-          <Spin size="large" />
+          <Spin size="large" data-testid="loading-spinner" />
         </div>
       ) : error ? (
         <div className="text-center text-red-500">
@@ -65,6 +65,14 @@ const AppInfoPopup: React.FC<AppInfoPopupProps> = ({ id, isOpen, onClose }) => {
               <p className="text-lg font-semibold">
                 {appInfo.results[0].formattedPrice}
               </p>
+              <a
+                href={appInfo.results[0].trackViewUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 hover:underline"
+              >
+                前往下載
+              </a>
             </div>
           </div>
           <div className="mb-4">
@@ -105,14 +113,16 @@ const AppInfoPopup: React.FC<AppInfoPopupProps> = ({ id, isOpen, onClose }) => {
             <div>
               <h3 className="mb-2 text-lg font-semibold">開發者</h3>
               <p>{appInfo.results[0].artistName}</p>
-              <a
-                href={appInfo.results[0].sellerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 hover:underline"
-              >
-                開發者網站
-              </a>
+              {!!appInfo.results[0].sellerUrl && (
+                <a
+                  href={appInfo.results[0].sellerUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:underline"
+                >
+                  開發者網站
+                </a>
+              )}
             </div>
           </div>
         </div>

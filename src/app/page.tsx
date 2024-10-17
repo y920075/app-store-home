@@ -1,29 +1,35 @@
 "use client";
 import React, { useState } from "react";
-import {
-  useGetTopFreeAppsQuery,
-  useGetTopGrossingAppsQuery,
-} from "@/services/itunes";
+import { Alert } from "antd";
 
 import SearchBar from "./components/SearchBar";
 import Recommendations from "./components/Recommendations";
 import AppList from "./components/AppList";
 import AppInfoPopup from "./components/AppInfoPopup";
-import { IAppEntry } from "@/services/types";
+
+import type { IAppEntry } from "@/services/types";
+import {
+  useGetTopFreeAppsQuery,
+  useGetTopGrossingAppsQuery,
+} from "@/services/itunes";
+
 const AppStorePage = () => {
+  const [searchValue, setSearchValue] = useState("");
+  const [isAppInfoPopupOpen, setIsAppInfoPopupOpen] = useState(false);
+  const [selectedAppId, setSelectedAppId] = useState<string>("");
+
   const {
+    isError: isErrorFreeApps,
     isLoading: isLoadingFreeApps,
     isFetching: isFetchingFreeApps,
     data: topFreeApps,
   } = useGetTopFreeAppsQuery(100);
   const {
+    isError: isErrorGrossingApps,
     isLoading: isLoadingGrossingApps,
     isFetching: isFetchingGrossingApps,
     data: topGrossingApps,
   } = useGetTopGrossingAppsQuery(10);
-  const [searchValue, setSearchValue] = useState("");
-  const [isAppInfoPopupOpen, setIsAppInfoPopupOpen] = useState(false);
-  const [selectedAppId, setSelectedAppId] = useState<string>("");
 
   const filterApps = (app: IAppEntry) =>
     app["im:name"].label.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -47,18 +53,38 @@ const AppStorePage = () => {
     <div className="mx-auto max-w-md font-sans">
       <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
       <div className="border-b border-gray-300 p-4">
-        <Recommendations
-          apps={filteredGrossingApps || []}
-          isLoading={isLoadingGrossingApps || isFetchingGrossingApps}
-          handleAppClick={handleAppClick}
-        />
+        {isErrorGrossingApps ? (
+          <div className="my-4">
+            <Alert
+              message="Loading Failed, please try again later"
+              type="error"
+              showIcon
+            />
+          </div>
+        ) : (
+          <Recommendations
+            apps={filteredGrossingApps || []}
+            isLoading={isLoadingGrossingApps || isFetchingGrossingApps}
+            handleAppClick={handleAppClick}
+          />
+        )}
       </div>
       <div className="px-4 pb-4">
-        <AppList
-          apps={filteredApps || []}
-          isLoading={isLoadingFreeApps || isFetchingFreeApps}
-          handleAppClick={handleAppClick}
-        />
+        {isErrorFreeApps ? (
+          <div className="my-4">
+            <Alert
+              message="Loading Failed, please try again later"
+              type="error"
+              showIcon
+            />
+          </div>
+        ) : (
+          <AppList
+            apps={filteredApps || []}
+            isLoading={isLoadingFreeApps || isFetchingFreeApps}
+            handleAppClick={handleAppClick}
+          />
+        )}
       </div>
       <AppInfoPopup
         id={selectedAppId}
