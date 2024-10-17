@@ -4,7 +4,7 @@ interface ITunesStoreFeed {
       name: { label: string };
       uri: { label: string };
     };
-    entry: AppEntry[];
+    entry: IAppEntry[];
     updated: { label: string };
     rights: { label: string };
     title: { label: string };
@@ -14,7 +14,7 @@ interface ITunesStoreFeed {
   };
 }
 
-interface AppEntry {
+interface IAppEntry {
   "im:name": { label: string };
   "im:image": Image[];
   summary: { label: string };
@@ -116,4 +116,4 @@ interface AppInfo {
   userRatingCount: number;
 }
 
-export type { ITunesStoreFeed, IAppInfoResponse };
+export type { ITunesStoreFeed, IAppInfoResponse, IAppEntry };

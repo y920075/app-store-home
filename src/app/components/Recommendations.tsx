@@ -1,12 +1,12 @@
 import { Spin, Empty } from "antd";
 import Image from "next/image";
-import type { ITunesStoreFeed } from "@/services/types";
+import type { IAppEntry } from "@/services/types";
 const Recommendations = ({
   apps,
   isLoading,
   handleAppClick,
 }: {
-  apps: ITunesStoreFeed["feed"]["entry"];
+  apps: IAppEntry[];
   isLoading: boolean;
   handleAppClick: (id: string) => void;
 }) => {

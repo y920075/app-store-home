@@ -2,17 +2,16 @@ import { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { List, Spin } from "antd";
 import Image from "next/image";
-import { Star } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import type { ITunesStoreFeed } from "@/services/types";
+import type { IAppEntry } from "@/services/types";
 
 const ListItem = ({
   app,
   index,
   handleAppClick,
 }: {
-  app: ITunesStoreFeed["feed"]["entry"][number];
+  app: IAppEntry;
   index: number;
   handleAppClick: (id: string) => void;
 }) => {
@@ -43,12 +42,6 @@ const ListItem = ({
             <p className="text-sm text-gray-500">
               {app.category.attributes.label}
             </p>
-            {/* <div className="flex items-center">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} size={16} className="text-gray-300" />
-              ))}
-              <span className="ml-1 text-sm text-gray-500">(200)</span>
-            </div> */}
           </div>
         </div>
       </List.Item>
@@ -61,7 +54,7 @@ const AppList = ({
   isLoading,
   handleAppClick,
 }: {
-  apps: ITunesStoreFeed["feed"]["entry"];
+  apps: IAppEntry[];
   isLoading: boolean;
   handleAppClick: (id: string) => void;
 }) => {
