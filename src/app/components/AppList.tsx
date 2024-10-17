@@ -26,7 +26,10 @@ const ListItem = ({
       transition={{ duration: 0.5, delay: 0.1 }}
     >
       <List.Item onClick={() => handleAppClick(app.id.attributes["im:id"])}>
-        <div className="grid cursor-pointer grid-cols-[32px_64px_1fr] items-center">
+        <div
+          className="grid cursor-pointer grid-cols-[32px_64px_1fr] items-center"
+          data-testid={`app-list-item-${app.id.attributes["im:id"]}`}
+        >
           <span className="mr-4 text-lg font-semibold">{index + 1}</span>
           <div className="h-12 w-12 overflow-hidden rounded-full bg-gray-300">
             <Image
@@ -68,7 +71,7 @@ const AppList = ({
     <div>
       {isLoading ? (
         <div className="flex h-40 items-center justify-center">
-          <Spin />
+          <Spin data-testid="loading-spinner" />
         </div>
       ) : (
         <InfiniteScroll
@@ -84,7 +87,7 @@ const AppList = ({
             dataSource={pageApps}
             renderItem={(app, index) => (
               <ListItem
-                key={index}
+                key={app.id.attributes["im:id"]}
                 app={app}
                 index={index}
                 handleAppClick={handleAppClick}

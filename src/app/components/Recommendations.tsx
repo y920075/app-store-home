@@ -1,6 +1,7 @@
 import { Spin, Empty } from "antd";
 import Image from "next/image";
 import type { IAppEntry } from "@/services/types";
+
 const Recommendations = ({
   apps,
   isLoading,
@@ -15,15 +16,20 @@ const Recommendations = ({
       <h2 className="mb-2 text-xl font-semibold">推薦</h2>
       {isLoading ? (
         <div className="flex h-40 items-center justify-center">
-          <Spin />
+          <Spin data-testid="recommendations-loading" />
         </div>
       ) : apps.length === 0 ? (
-        <Empty description="No Data" image={Empty.PRESENTED_IMAGE_SIMPLE} />
+        <Empty
+          data-testid="recommendations-empty"
+          description="No Data"
+          image={Empty.PRESENTED_IMAGE_SIMPLE}
+        />
       ) : (
         <div className="scrollbar-hide grid auto-cols-[64px] grid-flow-col gap-4 overflow-x-auto">
           {apps.map((app, index) => (
             <div
-              key={index}
+              key={app.id.attributes["im:id"]}
+              data-testid={`recommendation-${app.id.attributes["im:id"]}`}
               className="flex w-16 cursor-pointer flex-col"
               onClick={() => handleAppClick(app.id.attributes["im:id"])}
             >
