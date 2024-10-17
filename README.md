@@ -2,15 +2,19 @@
 
 ## 環境要求
 
-- Node.js 版本: v18.20 +
+- Node.js 版本: v18.20+
 - Package Manager: pnpm
 
 ## 安裝依賴
 
-根據您使用的套件管理器，執行以下命令之一：
-
 ```bash
 pnpm install
+```
+
+## 執行測試
+
+```bash
+pnpm test
 ```
 
 ## 啟動開發伺服器
@@ -19,8 +23,12 @@ pnpm install
 pnpm dev
 ```
 
+前往 http://localhost:3000 查看專案
+
 ## 使用 Docker 啟動伺服器
 
 ```bash
 docker compose up -d
 ```
+
+前往 http://localhost:6500 查看專案
