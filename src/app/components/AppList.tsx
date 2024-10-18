@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { List, Spin } from "antd";
+import { List } from "antd";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 import type { IAppEntry } from "@/services/types";
+import LoadingSpin from "@/components/LoadingSpin";
 
 const ListItem = ({
   app,
@@ -61,18 +61,28 @@ const AppList = ({
   isLoading: boolean;
   handleAppClick: (id: string) => void;
 }) => {
+  const ref = useRef<HTMLDivElement>(null);
   const pageSize = 10;
   const [pageIndex, setPageIndex] = useState(0);
 
   const pageApps = apps.slice(0, (pageIndex + 1) * pageSize);
   const maxPageIndex = Math.ceil(apps.length / pageSize);
 
+  // 如果目前頁面高度足夠顯示更多的話，就手動觸發一次 next
+  // 因為 InfiniteScroll 似乎不會自動觸發
+  useEffect(() => {
+    if (
+      ref.current &&
+      ref.current.getBoundingClientRect().bottom < window.innerHeight
+    ) {
+      setPageIndex((prev) => prev + 1);
+    }
+  }, []);
+
   return (
-    <div>
+    <div ref={ref}>
       {isLoading ? (
-        <div className="flex h-40 items-center justify-center">
-          <Spin data-testid="loading-spinner" />
-        </div>
+        <LoadingSpin data-testid="loading-spinner" />
       ) : (
         <InfiniteScroll
           dataLength={pageApps.length}
@@ -81,7 +91,7 @@ const AppList = ({
           next={() => {
             setPageIndex((prev) => prev + 1);
           }}
-          loader={<Spin />}
+          loader={<LoadingSpin data-testid="loading-spinner" />}
         >
           <List
             dataSource={pageApps}

@@ -3,6 +3,7 @@ import { Spin, Empty } from "antd";
 import Image from "next/image";
 import type { IAppEntry } from "@/services/types";
 import useDraggableScroll from "@/hooks/useDraggableScroll";
+import LoadingSpin from "@/components/LoadingSpin";
 const Recommendations = ({
   apps,
   isLoading,
@@ -20,9 +21,7 @@ const Recommendations = ({
     <div>
       <h2 className="mb-2 text-xl font-semibold">推薦</h2>
       {isLoading ? (
-        <div className="flex h-40 items-center justify-center">
-          <Spin data-testid="recommendations-loading" />
-        </div>
+        <LoadingSpin data-testid="recommendations-loading" />
       ) : apps.length === 0 ? (
         <Empty
           data-testid="recommendations-empty"
