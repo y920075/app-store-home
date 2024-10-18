@@ -1,5 +1,9 @@
 # 專案說明
 
+## Online Demo
+
+https://app-store-home.vercel.app/
+
 ## 環境要求
 
 - Node.js 版本: v18.20+
