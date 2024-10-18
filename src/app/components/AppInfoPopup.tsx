@@ -35,8 +35,8 @@ const AppInfoPopup: React.FC<AppInfoPopupProps> = ({ id, isOpen, onClose }) => {
         </div>
       ) : appInfo ? (
         <div className="flex flex-col">
-          <div className="mb-4 flex items-start">
-            <div className="mr-4 h-32 w-32 flex-shrink-0 overflow-hidden rounded-2xl">
+          <div className="mb-4 flex items-start pr-8">
+            <div className="mr-4 h-24 w-24 flex-shrink-0 overflow-hidden rounded-2xl sm:h-32 sm:w-32">
               <Image
                 src={appInfo.results[0].artworkUrl512}
                 alt={appInfo.results[0].trackName}
@@ -46,13 +46,13 @@ const AppInfoPopup: React.FC<AppInfoPopupProps> = ({ id, isOpen, onClose }) => {
               />
             </div>
             <div className="flex-grow">
-              <h2 className="mb-2 text-2xl font-bold">
+              <h2 className="mb-2 text-wrap text-2xl font-bold">
                 {appInfo.results[0].trackName}
               </h2>
               <p className="mb-2 text-gray-600">
                 {appInfo.results[0].sellerName}
               </p>
-              <div className="mb-2 flex items-center">
+              <div className="mb-2 flex flex-wrap items-center">
                 <Rate
                   disabled
                   defaultValue={appInfo.results[0].averageUserRating}
