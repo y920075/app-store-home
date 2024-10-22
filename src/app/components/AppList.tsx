@@ -82,7 +82,7 @@ const AppList = ({
   return (
     <div ref={ref}>
       {isLoading ? (
-        <LoadingSpin data-testid="loading-spinner" />
+        <LoadingSpin />
       ) : (
         <InfiniteScroll
           dataLength={pageApps.length}
@@ -91,7 +91,7 @@ const AppList = ({
           next={() => {
             setPageIndex((prev) => prev + 1);
           }}
-          loader={<LoadingSpin data-testid="loading-spinner" />}
+          loader={<LoadingSpin />}
         >
           <List
             dataSource={pageApps}

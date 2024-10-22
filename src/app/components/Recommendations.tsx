@@ -21,7 +21,7 @@ const Recommendations = ({
     <div>
       <h2 className="mb-2 text-xl font-semibold">推薦</h2>
       {isLoading ? (
-        <LoadingSpin data-testid="recommendations-loading" />
+        <LoadingSpin />
       ) : apps.length === 0 ? (
         <Empty
           data-testid="recommendations-empty"

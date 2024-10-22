@@ -27,7 +27,7 @@ const AppInfoPopup: React.FC<AppInfoPopupProps> = ({ id, isOpen, onClose }) => {
     >
       {isLoading || isFetching ? (
         <div className="flex h-40 items-center justify-center">
-          <Spin size="large" data-testid="loading-spinner" />
+          <Spin size="large" data-testid="loading-spin" />
         </div>
       ) : error ? (
         <div className="text-center text-red-500">

@@ -55,7 +55,7 @@ describe("AppInfoPopup", () => {
       </Provider>
     );
 
-    expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
+    expect(screen.getByTestId("loading-spin")).toBeInTheDocument();
   });
 
   it("應該顯示應用信息", async () => {

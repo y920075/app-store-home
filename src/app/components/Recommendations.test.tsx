@@ -106,7 +106,7 @@ describe("Recommendations 元件", () => {
         handleAppClick={mockHandleAppClick}
       />
     );
-    expect(screen.getByTestId("recommendations-loading")).toBeInTheDocument();
+    expect(screen.getByTestId("loading-spin")).toBeInTheDocument();
   });
 
   it("應該正確渲染空狀態", () => {

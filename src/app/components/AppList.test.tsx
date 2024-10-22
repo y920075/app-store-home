@@ -129,7 +129,7 @@ describe("AppList 元件", () => {
     render(
       <AppList apps={[]} isLoading={true} handleAppClick={mockHandleAppClick} />
     );
-    expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
+    expect(screen.getByTestId("loading-spin")).toBeInTheDocument();
   });
 
   it("渲染應用列表", () => {
