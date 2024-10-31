@@ -31,6 +31,16 @@ const AppStorePage = () => {
     data: topGrossingApps,
   } = useGetTopGrossingAppsQuery(10);
 
+  if (!topFreeApps?.feed?.entry || !topGrossingApps?.feed?.entry) {
+    return (
+      <Alert
+        message="Itunes API is not available, please try again later"
+        type="error"
+        showIcon
+      />
+    );
+  }
+
   const filterApps = (app: IAppEntry) =>
     app["im:name"].label.toLowerCase().includes(searchValue.toLowerCase()) ||
     app.summary.label.toLowerCase().includes(searchValue.toLowerCase()) ||
