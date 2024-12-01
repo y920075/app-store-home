@@ -31,13 +31,20 @@ const AppStorePage = () => {
     data: topGrossingApps,
   } = useGetTopGrossingAppsQuery(10);
 
-  if (!topFreeApps?.feed?.entry || !topGrossingApps?.feed?.entry) {
+  if (
+    !isLoadingFreeApps &&
+    !isLoadingGrossingApps &&
+    !topFreeApps?.feed?.entry &&
+    !topGrossingApps?.feed?.entry
+  ) {
     return (
-      <Alert
-        message="Itunes API is not available, please try again later"
-        type="error"
-        showIcon
-      />
+      <div className="flex h-full w-full items-center justify-center">
+        <Alert
+          message="Itunes API is not available, please try again later"
+          type="error"
+          showIcon
+        />
+      </div>
     );
   }
 
